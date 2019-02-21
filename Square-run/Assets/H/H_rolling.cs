@@ -19,8 +19,10 @@ public class H_rolling : StateMachineBehaviour {
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		if (Vector2.Distance(m_controller.transform.position, target) > 0.1) {
-			m_controller.Move(h.velocity * dir * Time.deltaTime);
+		Vector2 velocity = h.velocity;
+		velocity.y = 0;
+		if (Vector2.Distance(m_controller.transform.position, target) > 0.5) {
+			m_controller.Move(velocity * dir * Time.deltaTime);
 		} else {
 			m_controller.transform.position = target;
 			animator.SetTrigger("Idle");

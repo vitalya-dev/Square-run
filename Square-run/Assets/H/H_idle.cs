@@ -8,22 +8,30 @@ public class H_idle : StateMachineBehaviour {
 
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+		animator.SetFloat("Direction", 0.0f);
 		m_controller = animator.transform.parent.GetComponent<MotionController>();
 		h = animator.GetComponent<H>();
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		if (!m_controller.is_grounded)
+		animator.SetFloat("Direction", 0.0f);
+		if (!m_controller.is_grounded) {
 			animator.SetTrigger("fall");
-		else {
-			float input = Input.GetAxisRaw("Horizontal");
-			if (Mathf.Abs(input) > 0) {
-				animator.SetTrigger("Rolling");
-				animator.SetFloat("Direction", Mathf.Sign(input));
-			} else if (Input.GetKey(KeyCode.Space))
-				animator.SetTrigger("Jump");
+			return;
 		}
+
+		float input = Input.GetAxisRaw("Horizontal");
+		if (Mathf.Abs(input) > 0) {
+			float dir = Mathf.Sign(input);
+			animator.SetFloat("Direction", dir);
+			if ((dir > 0 && !m_controller.collisionRight) ||
+				(dir < 0 && !m_controller.collisionLeft)) {
+				animator.SetTrigger("Rolling");
+			}
+		}
+		if (Input.GetKeyDown(KeyCode.Space))
+			animator.SetTrigger("Jump");
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state

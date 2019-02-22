@@ -13,7 +13,7 @@ public class H_rolling : StateMachineBehaviour {
 		m_controller = animator.transform.parent.GetComponent<MotionController>();
 		h = animator.GetComponent<H>();
 
-		dir = (int)animator.GetFloat("Direction");
+		dir = (int) animator.GetFloat("Direction");
 		target = m_controller.transform.position + new Vector3(dir, 0, 0);
 	}
 

@@ -7,4 +7,7 @@ public class H : MonoBehaviour {
 	public Sprite[] sprites;
 
 	public int sprite_index = 0;
+
+	public GameObject plump;
+	
 }

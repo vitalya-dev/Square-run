@@ -30,8 +30,11 @@ public class H_idle : StateMachineBehaviour {
 				animator.SetTrigger("Rolling");
 			}
 		}
-		if (Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetKeyDown(KeyCode.Space) && !m_controller.collisionAbove)
 			animator.SetTrigger("Jump");
+
+		if (Input.GetKeyDown(KeyCode.S))
+			animator.SetTrigger("Attack");
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state

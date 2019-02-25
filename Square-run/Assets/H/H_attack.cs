@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class H_jump : StateMachineBehaviour {
+public class H_attack : StateMachineBehaviour {
 	private MotionController m_controller;
 	private H h;
 	private Vector2 target;
@@ -12,23 +12,23 @@ public class H_jump : StateMachineBehaviour {
 		m_controller = animator.transform.parent.GetComponent<MotionController>();
 		h = animator.GetComponent<H>();
 
-		target = m_controller.transform.position + new Vector3(1, 1, 0);
+		target = m_controller.transform.position + new Vector3(Mathf.Infinity, 0, 0);
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+		Vector2 velocity = h.velocity;
+		velocity.x = 0;
+
 		if (Vector2.Distance(m_controller.transform.position, target) > 0.5) {
-			m_controller.Move(h.velocity * Time.deltaTime);
-		} else {
-			m_controller.transform.position = target;
-			animator.SetTrigger("Idle");
+			m_controller.Move(velocity * 2 * Time.deltaTime);
 		}
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-
-	}
+	//override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+	//
+	//}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here
 	//override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {

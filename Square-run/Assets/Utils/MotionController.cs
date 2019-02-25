@@ -12,6 +12,8 @@ public class MotionController : MonoBehaviour {
 
 	public bool collisionRight = true;
 
+	public bool collisionAbove = true;
+
 	// Use this for initialization
 	void Start() {
 
@@ -22,6 +24,7 @@ public class MotionController : MonoBehaviour {
 		Debug.DrawRay(transform.position, Vector2.down, Color.red);
 		Debug.DrawRay(transform.position, Vector2.left, Color.red);
 		Debug.DrawRay(transform.position, Vector2.right, Color.red);
+		Debug.DrawRay(transform.position, Vector2.up, Color.red);
 
 		RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1, collisionMask);
 		if (hit.collider)
@@ -40,6 +43,12 @@ public class MotionController : MonoBehaviour {
 			collisionRight = true;
 		else
 			collisionRight = false;
+
+		hit = Physics2D.Raycast(transform.position, Vector2.up, 1, collisionMask);
+		if (hit.collider)
+			collisionAbove = true;
+		else
+			collisionAbove = false;
 	}
 
 	public void Move(Vector3 velocity) {

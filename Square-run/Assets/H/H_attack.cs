@@ -17,9 +17,30 @@ public class H_attack : StateMachineBehaviour {
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		Vector2 velocity = h.velocity;
-		velocity.x = 0;
+		Vector2 velocity = new Vector2(0, 0);
 
+		switch (h.sprite_index) {
+			case 0:
+				velocity.y = h.velocity.y;
+				if (m_controller.collisionAbove)
+					animator.SetTrigger("Explode");
+				break;
+			case 1:
+				velocity.x = h.velocity.x;
+				if (m_controller.collisionRight)
+					animator.SetTrigger("Explode");
+				break;
+			case 2:
+				velocity.y = -1 * h.velocity.y;
+				if (m_controller.is_grounded)
+					animator.SetTrigger("Explode");
+				break;
+			case 3:
+				velocity.x = -1 * h.velocity.x;
+				if (m_controller.collisionLeft)
+					animator.SetTrigger("Explode");
+				break;
+		}
 		if (Vector2.Distance(m_controller.transform.position, target) > 0.5) {
 			m_controller.Move(velocity * 2 * Time.deltaTime);
 		}

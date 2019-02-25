@@ -21,30 +21,30 @@ public class MotionController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
-		Debug.DrawRay(transform.position, Vector2.down, Color.red);
-		Debug.DrawRay(transform.position, Vector2.left, Color.red);
-		Debug.DrawRay(transform.position, Vector2.right, Color.red);
-		Debug.DrawRay(transform.position, Vector2.up, Color.red);
+		Debug.DrawRay(transform.position, Vector2.down / 2, Color.red);
+		Debug.DrawRay(transform.position, Vector2.left / 2, Color.red);
+		Debug.DrawRay(transform.position, Vector2.right / 2, Color.red);
+		Debug.DrawRay(transform.position, Vector2.up / 2, Color.red);
 
-		RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1, collisionMask);
+		RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.6f, collisionMask);
 		if (hit.collider)
 			is_grounded = true;
 		else
 			is_grounded = false;
 
-		hit = Physics2D.Raycast(transform.position, Vector2.left, 1, collisionMask);
+		hit = Physics2D.Raycast(transform.position, Vector2.left, 0.6f, collisionMask);
 		if (hit.collider)
 			collisionLeft = true;
 		else
 			collisionLeft = false;
 
-		hit = Physics2D.Raycast(transform.position, Vector2.right, 1, collisionMask);
+		hit = Physics2D.Raycast(transform.position, Vector2.right, 0.6f, collisionMask);
 		if (hit.collider)
 			collisionRight = true;
 		else
 			collisionRight = false;
 
-		hit = Physics2D.Raycast(transform.position, Vector2.up, 1, collisionMask);
+		hit = Physics2D.Raycast(transform.position, Vector2.up, 0.6f, collisionMask);
 		if (hit.collider)
 			collisionAbove = true;
 		else

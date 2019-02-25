@@ -34,7 +34,6 @@ public class E_patrol : StateMachineBehaviour {
 				target_c = target_r;
 			else if (target_c == target_r)
 				target_c = target_l;
-			Debug.Log("Done");
 		}
 	}
 

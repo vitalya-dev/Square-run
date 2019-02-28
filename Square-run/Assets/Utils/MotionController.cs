@@ -8,11 +8,11 @@ public class MotionController : MonoBehaviour {
 
 	public bool is_grounded = false;
 
-	public bool collisionLeft = true;
+	public bool collisionLeft = false;
 
-	public bool collisionRight = true;
+	public bool collisionRight = false;
 
-	public bool collisionAbove = true;
+	public bool collisionAbove = false;
 
 	// Use this for initialization
 	void Start() {
